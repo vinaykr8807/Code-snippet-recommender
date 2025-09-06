@@ -1,0 +1,132 @@
+title,content,difficulty,num_of_lines,code_length,cyclomatic_complexity,readability
+Hello World program,"public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println(""Hello, World!"");
+    }
+}",Beginner,5,123,1,0.8
+Hello World program,"public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println(""Hello, World!"");
+    }
+}",Beginner,5,123,1,0.8
+Hello World program,"public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println(""Hello, World!"");
+    }
+}",Beginner,5,123,1,0.8
+linear search,"```java
+public class LinearSearch {
+
+    /**
+     * Performs a linear search on an array to find a target element.
+     *
+     * @param arr     The array to search through.
+     * @param target  The element to search for.
+     * @return The index of the target element if found, or -1 if not found.
+     */
+    public static int linearSearch(int[] arr, int target) {
+        // Iterate through the array
+        for (int i = 0; i < arr.length; i++) {
+            // Check if the current element is equal to the target
+            if (arr[i] == target) {
+                // If found, return the index
+                return i;
+            }
+        }
+        // If the target is not found, return -1
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {5, 10, 15, 20, 25};
+        int target = 15;
+
+        int index = linearSearch(numbers, target);
+
+        if (index != -1) {
+            System.out.println(""Target "" + target + "" found at index "" + index);
+        } else {
+            System.out.println(""Target "" + target + "" not found in the array."");
+        }
+
+        // Example with a target not in the array
+        target = 30;
+        index = linearSearch(numbers, target);
+        if (index != -1) {
+            System.out.println(""Target "" + target + "" found at index "" + index);
+        } else {
+            System.out.println(""Target "" + target + "" not found in the array."");
+        }
+    }
+}
+```",Beginner,46,1455,1,0.8
+flatten linked list into tree,"```java
+import java.util.*;
+
+class Node {
+    int data;
+    Node next;
+    Node child;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+        this.child = null;
+    }
+}
+
+class LinkedListToTree {
+
+    /**
+     * Flattens a linked list into a tree structure.
+     *
+     * The linked list is represented with 'next' pointers for horizontal connections
+     * and 'child' pointers for vertical connections. The goal is to create a
+     * tree where each node's 'child' pointer points to the root of a subtree
+     * formed by the linked list.
+     *
+     * This implementation uses a recursive approach to efficiently traverse and
+     * flatten the linked list.
+     *
+     * @param head The head node of the linked list.
+     * @return The root node of the flattened tree.
+     */
+    public static Node flattenLinkedListToTree(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        Node current = head;
+        while (current != null) {
+            // If current node has a child, flatten the child list and attach it to the current node.
+            if (current.child != null) {
+                Node childHead = current.child;
+                Node childTail = findTail(childHead);
+
+                // Attach the child list to the current node.
+                Node nextNode = current.next;
+                current.next = childHead;
+                childHead.child = null; // Important: Remove child pointer after flattening
+
+                // Connect the tail of the child list to the next node in the original list.
+                if (nextNode != null) {
+                    childTail.next = nextNode;
+                }
+
+                current = nextNode; // Move current to the next node in the original list.
+            } else {
+                current = current.next;
+            }
+        }
+
+        // Find the root of the tree. The root is the node with no parent.
+        Node root = head;
+        while (root.next != null) {
+            root = root.next;
+        }
+
+        return root;
+    }
+
+    /**
+     * Helper function",Advanced,70,2095,1,0.8
